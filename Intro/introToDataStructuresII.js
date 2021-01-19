@@ -43,6 +43,38 @@ class LinkedList {
         
     }
 
+    //insert a value after a specific value, practice using 2 parameters
+    insertAfter(value, followedValue) {
+        const existingNode = this.find(followedValue);
+
+        if(existingNode) {
+            const newNode = { value: value, next: existingNode.next };
+            existingNode.next = newNode;
+        }
+    }
+
+
+    find(value) {
+        if(!this.head) {
+            return null;
+        }
+
+        //look through the whole list and check for the value
+        let curNode = this.head;
+
+        while(curNode) {
+            if(curNode.value === value) {
+                return curNode;
+            }
+
+            curNode = curNode.next;
+        }
+        
+        //if it cannot find anything
+        return null;
+    }
+
+
     delete(value) {
         //check to make sure the list is not empty, if it is end the function
 
@@ -80,7 +112,7 @@ class LinkedList {
 
     //method to easily turn into an array
     toArray() {
-        const elemens = [];
+        const elements = [];
 
         let curNode = this.head;
         while(curNode) {
@@ -91,3 +123,9 @@ class LinkedList {
         return elements;
     }
 }
+
+/* WHY USE A LINKED LIST?
+- Historically, the main reason was memory management. Didn't need to specify the length in advance (not a problem in current JavaScript)
+-PRIMARILY - Linked lists are useful for a lot of insertions at the beginning or middle of lists. It allows things to be added without actually
+changing the position of the elements. If you use an array, all of the elements get shifted in one way or another.
+Linked Lists are also fast than arrays. */
